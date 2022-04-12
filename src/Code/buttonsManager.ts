@@ -37,11 +37,10 @@ export enum ButtonsPad {
 
 export class ButtonManager {
 
-	//protected static attachedCloth = new Map<MRE.Guid, MRE.Actor>();
-
+    public static escapeCode = ""
     public static holderMain: MRE.Actor;
     public static headerTextActor: MRE.Actor;
-    public static headerText: string;
+    public static headerText = "";
 	protected assets: MRE.Actor;
     
     constructor(buttonsDatabase: { [key: string]: ButtonDescriptor }) {
@@ -55,7 +54,7 @@ export class ButtonManager {
     
 	protected CreateButtonInMenu(buttonRecord: ButtonDescriptor): void {
 
-        if(ButtonManager.holderMain === null)
+        if(ButtonManager.holderMain === null || typeof ButtonManager.holderMain === 'undefined')
             ButtonManager.holderMain = MRE.Actor.Create(App.Context);
 
 
@@ -93,23 +92,16 @@ export class ButtonManager {
 			resourceId: buttonRecord.resourceId,
 			actor: {
 				parentId: holder.id,
-				// transform: {
-				// 	local: {
-				// 		scale: new MRE.Vector3(0, 0, 0),
-				// 	},
-				// },
 			},
 		});
-		
-		// Set a click handler on the button.
-		// NOTE: button press event fails on MAC
+
         if(buttonRecord.pressValue !==ButtonsPad.boxContainer.toString() )
             Utilities.CreateHoverButton(model).onClick((user) =>
                 ButtonManager.ButtonPressed(buttonRecord, user)
 		);
 
-		const myCurve: EaseCurve = [0.17,0.67,0.59,1.28]
-		Utilities.ScaleAnimation(model, new MRE.Vector3(1, 1, 1), 0.5, myCurve);
+		// const myCurve: EaseCurve = [0.17,0.67,0.59,1.28]
+		// Utilities.ScaleAnimation(model, new MRE.Vector3(1, 1, 1), 0.5, myCurve);
 	}
 
 	public static ButtonPressed(buttonRecord: ButtonDescriptor, user: MRE.User) {
@@ -118,39 +110,58 @@ export class ButtonManager {
 
         switch (valueButton) {
             case ButtonsPad.buttonOk:
-                ButtonManager.WriteText("Congratulations", new MRE.Color3(0,0,255));
+                if(ButtonManager.escapeCode === ButtonManager.headerText)
+                    ButtonManager.WriteText("RIGHT!", new MRE.Color3(0,0,255));
+                else
+                    ButtonManager.WriteText("FAIL!", new MRE.Color3(255,0,0));
                 break;
             case ButtonsPad.buttonDelete:
-                ButtonManager.WriteText("FAIL!", new MRE.Color3(255,0,0));
+                ButtonManager.WriteText("", new MRE.Color3(255,0,0));
                 break;
             case ButtonsPad.boxContainer:
                 break;
             default:
-                ButtonManager.WriteText(valueButton.toString(),new MRE.Color3(0,255,0));
+                ButtonManager.WriteText(valueButton.toString(),new MRE.Color3(0,255,0), true);
                 break;
             }
 	}
 
-    public static WriteText(text: string, color: MRE.Color3Like, append = true) {
+    public static WriteText(text: string, color: MRE.Color3Like, append = false) {
         if(append)
+        {
+            if(ButtonManager.headerText.length >= 3)
+            {
+                ButtonManager.headerText = "";
+            }
             ButtonManager.headerText += text;
+        }
         else
         ButtonManager.headerText = text;
 
-        ButtonManager.headerTextActor.destroy();
+        if(ButtonManager.headerTextActor === null || typeof ButtonManager.headerTextActor === 'undefined')
+        {
+            ButtonManager.CreateHeaderText(color);
+        }
+        else{
+            ButtonManager.headerTextActor.text.contents = ButtonManager.headerText;
+            ButtonManager.headerTextActor.text.color = color;
+        }
+        
+    }
 
+    private static CreateHeaderText(color: MRE.Color3Like) {
         ButtonManager.headerTextActor = MRE.Actor.Create(App.Context, {
             actor: {
                 parentId: ButtonManager.holderMain.id,
                 transform: {
                     local: {
-                        position: { x: 1, y: 1.5, z: 0 },
-                        scale: { x: 1, y: 1, z: 1 },
+                        position: { x: 0.4, y: 0.65, z: -0.4 },
+                        scale: { x: 0.5, y: 0.5, z: 0.5 },
                     },
                 },
                 text: {
                     contents: ButtonManager.headerText,
-                    anchor: MRE.TextAnchorLocation.TopLeft,
+                    anchor: MRE.TextAnchorLocation.MiddleRight,
                     color: color,
                     height: 0.3
                 },
@@ -158,3 +169,24 @@ export class ButtonManager {
         });
     }
 }
+
+/*
+"button01": {
+    "menuScale": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "pressValue": "1",
+    "resourceId": "artifact:1978323176999879096",
+    "menuPosition": {
+      "x": -0.285,
+      "y": 0.285,
+      "z": -0.35
+    },
+    "menuRotation": {
+      "x": 90,
+      "y": 180,
+      "z": 0
+    }
+  },*/

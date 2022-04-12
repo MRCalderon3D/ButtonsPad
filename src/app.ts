@@ -11,14 +11,16 @@ export default class App {
 
 	public static Context: MRE.Context;
 
-	private header = "Bravent Designs";
-	private color: MRE.Color3Like = { r: 218 / 255, g: 221 / 255, b: 2 / 255 };
+	// private header = "Bravent Designs";
+	// private color: MRE.Color3Like = { r: 218 / 255, g: 221 / 255, b: 2 / 255 };
 
 	private buttonList: ButtonManager;
 
 	constructor(private context: MRE.Context, private params: MRE.ParameterSet) {
 
 		App.Context = context;
+
+		ButtonManager.escapeCode = this.params.code as string ?? "123";
 
 		this.context.onStarted(() => {
 			// Get items and update

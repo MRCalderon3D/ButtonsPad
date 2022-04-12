@@ -2,7 +2,7 @@ import * as MRE from "@microsoft/mixed-reality-extension-sdk";
 
 import fetch from "node-fetch";
 
-import { ClothCarousel, ClothList, ClothMenu, ClothManager} from "./Code";
+import { ButtonManager} from "./Code";
 
 /**
  * The main class of this app. All the logic goes here.
@@ -14,42 +14,19 @@ export default class App {
 	private header = "Bravent Designs";
 	private color: MRE.Color3Like = { r: 218 / 255, g: 221 / 255, b: 2 / 255 };
 
-	private menu: ClothMenu;
-	private clothList: ClothManager;
+	private buttonList: ButtonManager;
 
 	constructor(private context: MRE.Context, private params: MRE.ParameterSet) {
 
 		App.Context = context;
 
-		this.context.onUserLeft((user) => ClothManager.RemoveUserCloth(user));
-		this.context.onUserJoined(() => ClothManager.UpdateUsersCloth());
-
 		this.context.onStarted(() => {
 			// Get items and update
 			if (this.params.content_pack) {
 				this.GetContentPackJson(this.params.content_pack as string, (json: any) => {
-					if (this.params.carousel as string === "true") {
-						this.clothList = new ClothCarousel(json);
-					} else {
-						this.clothList = new ClothList(json);
-					}
+					this.buttonList = new ButtonManager(json);
 				});
 			} else { console.log("ERROR: No content path selected!"); }
-
-			// Update options (color/header) and menu items.
-			if (this.params.options) {
-				this.GetContentPackJson(this.params.options as string, (json: any) => {
-					this.header = json.header ?? this.header;
-					this.color = json.color ?
-						{ r: json.color.r / 255, g: json.color.g / 255, b: json.color.b / 255 } : this.color;
-
-					this.menu = new ClothMenu(this.header, this.color);
-				});
-			} else {
-				this.header = this.params.header as string ?? this.header;
-
-				this.menu = new ClothMenu(this.header, this.color);
-			}
 		});
 	}
 

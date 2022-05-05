@@ -33,4 +33,18 @@ export class Utilities{
 		});
 
 	}
+
+	public static RotateAnimation(
+		object: MRE.Actor,
+		angle: MRE.Quaternion,
+		duration: number,
+		animationCurves?: MRE.EaseCurve
+	): void {
+		MRE.Animation.AnimateTo(App.Context, object, {
+			destination: { transform: { local: { rotation: angle } } },
+			duration: duration,
+			easing:  animationCurves ?? MRE.AnimationEaseCurves.EaseOutSine,
+		});
+
+	}
 }

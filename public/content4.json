@@ -1,0 +1,268 @@
+{
+    "boxDoor": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "103",
+      "resourceId": "artifact:1994647489193443575",
+      "menuPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button00": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "0",
+      "resourceId": "artifact:1978323272814559734",
+      "menuPosition": {
+        "x": 0.81,
+        "y": 0.9,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button01": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "1",
+      "resourceId": "artifact:1978323176999879096",
+      "menuPosition": {
+        "x": 0.515,
+        "y": 1.785,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button02": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "2",
+      "resourceId": "artifact:1978323259048853995",
+      "menuPosition": {
+        "x": 0.81,
+        "y": 1.785,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button03": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "3",
+      "resourceId": "artifact:1978323149342638504",
+      "menuPosition": {
+        "x": 1.105,
+        "y": 1.785,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button04": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "4",
+      "resourceId": "artifact:1978323231400001997",
+      "menuPosition": {
+        "x": 0.515,
+        "y": 1.49,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button05": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "5",
+      "resourceId": "artifact:1978323121291133338",
+      "menuPosition": {
+        "x": 0.81,
+        "y": 1.49,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button06": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "6",
+      "resourceId": "artifact:1978323163234173358",
+      "menuPosition": {
+        "x": 1.105,
+        "y": 1.49,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button07": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "7",
+      "resourceId": "artifact:1978323244897272274",
+      "menuPosition": {
+        "x": 0.515,
+        "y": 1.205,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button08": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "8",
+      "resourceId": "artifact:1978323218028560840",
+      "menuPosition": {
+        "x": 0.81,
+        "y": 1.205,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "button09": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "9",
+      "resourceId": "artifact:1978323191025631679",
+      "menuPosition": {
+        "x": 1.105,
+        "y": 1.205,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "buttonOk": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "101",
+      "resourceId": "artifact:1978323286580265469",
+      "menuPosition": {
+        "x": 1.105,
+        "y": 0.9,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "boxContainer": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "103",
+      "resourceId": "artifact:1978323204791337409",
+      "menuPosition": {
+        "x": 0.8,
+        "y": 1.5,
+        "z": 0
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    },
+    "buttonDelete": {
+      "menuScale": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      },
+      "pressValue": "102",
+      "resourceId": "artifact:1978323135316885922",
+      "menuPosition": {
+        "x": 0.515,
+        "y": 0.9,
+        "z": -0.35
+      },
+      "menuRotation": {
+        "x": 90,
+        "y": 180,
+        "z": 0
+      }
+    }
+  }

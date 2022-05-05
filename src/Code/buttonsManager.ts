@@ -40,11 +40,11 @@ export class ButtonManager {
     public static escapeCode = ""
     public static holderMain: MRE.Actor;
     public static headerTextActor: MRE.Actor;
-    public static headerText = "";
-	protected assets: MRE.Actor;
+    public static headerText = "123";
+	protected static assets: MRE.Actor;
     
     constructor(buttonsDatabase: { [key: string]: ButtonDescriptor }) {
-        this.assets = MRE.Actor.Create(App.Context);
+        ButtonManager.assets = MRE.Actor.Create(App.Context);
 		let x = 0;
     
 		for (const button of Object.values(buttonsDatabase)) {
@@ -72,7 +72,7 @@ export class ButtonManager {
 		// Create menu parent
 		const holder = MRE.Actor.Create(App.Context, {
 			actor: {
-				parentId: this.assets.id,
+				parentId: ButtonManager.assets.id,
 				transform: {
 					local: {
 						position: { x: position.x, y: position.y, z: position.z },
@@ -84,16 +84,32 @@ export class ButtonManager {
 						scale: scale,
 					},
 				},
+                // collider: { geometry: { shape: MRE.ColliderType.Auto} },
 			},
 		});
 
-		// Create a Artifact without a collider
-		let model = MRE.Actor.CreateFromLibrary(App.Context, {
-			resourceId: buttonRecord.resourceId,
-			actor: {
-				parentId: holder.id,
-			},
-		});
+		let model: MRE.Actor;
+        if(buttonRecord.pressValue !==ButtonsPad.boxContainer.toString() )
+        {
+            model = MRE.Actor.CreateFromLibrary(App.Context, {
+                resourceId: buttonRecord.resourceId,
+                actor: {
+                    parentId: holder.id,
+                },
+            });
+        }
+        else
+        {
+            model = MRE.Actor.CreateFromLibrary(App.Context, {
+                resourceId: buttonRecord.resourceId,
+                actor: {
+                    parentId: holder.id,
+                    // collider: { geometry: { shape: MRE.ColliderType.Box, size: { x: 0.1, y: 0.1, z: 0.1 }},
+                    // layer: MRE.CollisionLayer.Navigation },
+                    
+                },
+            });
+        }
 
         if(buttonRecord.pressValue !==ButtonsPad.boxContainer.toString() )
             Utilities.CreateHoverButton(model).onClick((user) =>
@@ -111,7 +127,18 @@ export class ButtonManager {
         switch (valueButton) {
             case ButtonsPad.buttonOk:
                 if(ButtonManager.escapeCode === ButtonManager.headerText)
+                {
                     ButtonManager.WriteText("RIGHT!", new MRE.Color3(0,0,255));
+
+                    (async () => { 
+                        Utilities.RotateAnimation(ButtonManager.assets, new MRE.Quaternion(0, -0.90, 0, 1), 1.5);
+                
+                        await new Promise(f => setTimeout(f, 5000));
+                        //await delay(1000);
+                        // Do something after
+                        Utilities.RotateAnimation(ButtonManager.assets, new MRE.Quaternion(0, 0, 0, 1), 10.5);
+                    })();
+                }
                 else
                     ButtonManager.WriteText("FAIL!", new MRE.Color3(255,0,0));
                 break;
@@ -152,10 +179,10 @@ export class ButtonManager {
     private static CreateHeaderText(color: MRE.Color3Like) {
         ButtonManager.headerTextActor = MRE.Actor.Create(App.Context, {
             actor: {
-                parentId: ButtonManager.holderMain.id,
+                parentId: ButtonManager.assets.id,
                 transform: {
                     local: {
-                        position: { x: 0.4, y: 0.65, z: -0.4 },
+                        position: { x: 1.2, y: 2.15, z: -0.4 },
                         scale: { x: 0.5, y: 0.5, z: 0.5 },
                     },
                 },

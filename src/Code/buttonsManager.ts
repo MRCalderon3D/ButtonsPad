@@ -57,7 +57,6 @@ export class ButtonManager {
         if(ButtonManager.holderMain === null || typeof ButtonManager.holderMain === 'undefined')
             ButtonManager.holderMain = MRE.Actor.Create(App.Context);
 
-
 		// special scaling and rotation for menu
 		const rotation = buttonRecord.menuRotation
 			? buttonRecord.menuRotation
@@ -84,40 +83,23 @@ export class ButtonManager {
 						scale: scale,
 					},
 				},
-                // collider: { geometry: { shape: MRE.ColliderType.Auto} },
 			},
 		});
 
 		let model: MRE.Actor;
-        if(buttonRecord.pressValue !==ButtonsPad.boxContainer.toString() )
-        {
-            model = MRE.Actor.CreateFromLibrary(App.Context, {
-                resourceId: buttonRecord.resourceId,
-                actor: {
-                    parentId: holder.id,
-                },
-            });
-        }
-        else
-        {
-            model = MRE.Actor.CreateFromLibrary(App.Context, {
-                resourceId: buttonRecord.resourceId,
-                actor: {
-                    parentId: holder.id,
-                    // collider: { geometry: { shape: MRE.ColliderType.Box, size: { x: 0.1, y: 0.1, z: 0.1 }},
-                    // layer: MRE.CollisionLayer.Navigation },
-                    
-                },
-            });
-        }
+        
+        model = MRE.Actor.CreateFromLibrary(App.Context, {
+            resourceId: buttonRecord.resourceId,
+            actor: {
+                parentId: holder.id,
+            },
+        });
+        
 
         if(buttonRecord.pressValue !==ButtonsPad.boxContainer.toString() )
             Utilities.CreateHoverButton(model).onClick((user) =>
                 ButtonManager.ButtonPressed(buttonRecord, user)
 		);
-
-		// const myCurve: EaseCurve = [0.17,0.67,0.59,1.28]
-		// Utilities.ScaleAnimation(model, new MRE.Vector3(1, 1, 1), 0.5, myCurve);
 	}
 
 	public static ButtonPressed(buttonRecord: ButtonDescriptor, user: MRE.User) {
@@ -132,10 +114,7 @@ export class ButtonManager {
 
                     (async () => { 
                         Utilities.RotateAnimation(ButtonManager.assets, new MRE.Quaternion(0, -0.90, 0, 1), 1.5);
-                
                         await new Promise(f => setTimeout(f, 5000));
-                        //await delay(1000);
-                        // Do something after
                         Utilities.RotateAnimation(ButtonManager.assets, new MRE.Quaternion(0, 0, 0, 1), 10.5);
                     })();
                 }
@@ -196,24 +175,3 @@ export class ButtonManager {
         });
     }
 }
-
-/*
-"button01": {
-    "menuScale": {
-      "x": 0.5,
-      "y": 0.5,
-      "z": 0.5
-    },
-    "pressValue": "1",
-    "resourceId": "artifact:1978323176999879096",
-    "menuPosition": {
-      "x": -0.285,
-      "y": 0.285,
-      "z": -0.35
-    },
-    "menuRotation": {
-      "x": 90,
-      "y": 180,
-      "z": 0
-    }
-  },*/
